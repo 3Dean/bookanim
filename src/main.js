@@ -3,6 +3,8 @@ import * as THREE from 'https://esm.sh/three@0.156.1';
 import { GLTFLoader } from 'https://esm.sh/three@0.156.1/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'https://esm.sh/three@0.156.1/examples/jsm/controls/OrbitControls.js';
 
+import './style.css';
+
 let scene, camera, renderer, controls, mixer, animations = [], model;
 let animationReversed = false;
 
