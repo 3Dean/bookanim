@@ -102,7 +102,7 @@ function handleInteraction(event) {
           animations.forEach(action => {
               const duration = action.getClip().duration;
 
-              action.stop(); // 🔥 Make sure it's not still running
+              action.stop();
               action.reset();
               action.setLoop(THREE.LoopOnce, 1);
               action.clampWhenFinished = true;
@@ -113,22 +113,17 @@ function handleInteraction(event) {
                   action.time = duration;
               } else {
                   action.timeScale = 1;
-                  action.time = 0;
+                  action.time = 0.0001; // ✅ Avoid zero (iOS hates zero)
               }
 
-              action.paused = false;
               action.play();
-
-              // ⚡ Force mixer to sync new action state
-              if (mixer) mixer.update(0.001); 
+              if (mixer) mixer.update(0.001); // ✅ Force mixer to advance by at least one frame immediately
           });
 
           animationReversed = !animationReversed;
       }
   }
 }
-
-
 
 // Events
 window.addEventListener('click', handleInteraction);
